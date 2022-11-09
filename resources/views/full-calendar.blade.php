@@ -11,7 +11,7 @@
                     class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     <!--body-->
                     <form action="" method="POST" id="modal-form" class="relative p-6 flex-auto">
-                        <input type="hidden" name="id" id="id">
+                        {{-- <input type="hidden" name="id" id="id">
                         <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label for="all_day">{{ __('AllDay') }}</label>
                             <input type="checkbox" name="all_day" id="all_day">
@@ -19,7 +19,7 @@
                         <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="start">
                                 {{ __('Event Start') }}
-                            </label>
+                            </label> --}}
                             <input type="date" name="start_date" id="start_date" required
                                 class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <input type="time" name="start_time" id="start_date"
@@ -36,9 +36,11 @@
                         </div>
                         <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                                {{ __('Event Name') }}
+                                {{ __('カテゴリー') }}
                             </label>
-                            <input type="text" name="title" id="title" required placeholder="イベント名"
+                            <input type="radio" name="title" id="title" required placeholder="イベント名"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <input type="radio" name="title" id="title" required placeholder="イベント名"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div>
                         <div class="my-4 text-slate-500 text-lg leading-relaxed mb-2">
@@ -57,7 +59,7 @@
                         </button>
                         <button type="button" id="update-button"
                             class="hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            {{ __('Update') }}
+                            {{ __('更新') }}
                         </button>
                         <button type="button" id="cancel-button"
                             class="text-center text-gray-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
