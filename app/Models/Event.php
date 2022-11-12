@@ -16,9 +16,15 @@ class Event extends Model
         'item',
         'cost',
         'other',
-        'memo'
+        'total',
+        'traffic',
+        'memo',
+        'start',
     ];
 
+    protected $appends = [
+        'title'
+    ];
     /**
      * Get the user that owns the Event
      *
@@ -56,5 +62,9 @@ class Event extends Model
         return date_parse_from_format('%Y-%m-%m %H:%i', $this->end)['hour']
             ? (new Carbon($this->end))->toTimeString()
             : '';
+    }
+    public function getTitleAttribute()
+    {
+        return $this->total;
     }
 }

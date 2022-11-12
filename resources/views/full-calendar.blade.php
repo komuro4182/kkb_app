@@ -12,11 +12,14 @@
                     <!--body-->
                     <form action="" method="POST" id="modal-form" class="relative p-6 flex-auto">
                         <input type="hidden" name="id" id="id">
+                        <input type="hidden" name="start" id="start">
+
                         {{-- <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label for="all_day">{{ __('AllDay') }}</label>
                             <input type="checkbox" name="all_day" id="all_day">
                         </div> --}}
-                        {{-- <div class="my-4 text-slate-500 text-lg leading-relaxed">
+                        {{-- 
+                        <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="start">
                                 {{ __('Event Start') }}
                             </label>
@@ -34,22 +37,22 @@
                             <input type="time" name="end_time" id="end_date"
                                 class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         </div> --}}
-                        <div class="my-4 text-slate-500 text-lg leading-relaxed">
+                        {{-- <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 {{ __('Event Name') }}
                             </label>
                             <input type="text" name="title" id="title" required placeholder="支払い方法→ここいらないかも"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         
-                        </div>
+                        </div> --}}
                         <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
                                 {{ __('食費') }}
                             </label>
-                            <input type="text" name="meal" class="money" id="meal" required placeholder="円" 
+                            <input type="text" name="meal" value="{{ old('meal') }}" class="money" id="meal" required placeholder="円"
                                 class="shadow appearance-none border rounded w-half w py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title" >
                                 {{ __('日用品') }}
                             </label>
                             <input type="text" name="item" class="money" id="item" required placeholder="円"

@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
                 ->constrained()  // テーブル名が異なる場合は引数にしてい
                 ->cascadeOnDelete()   // 紐付け先が削除された場合の動作
                 ->cascadeOnUpdate();  // 紐付け先が更新された場合の動作
+            $table->date('start');
             $table->integer('meal');
             $table->integer('item');
             $table->integer('cost');

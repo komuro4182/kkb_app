@@ -27,7 +27,8 @@ const calendar = new Calendar(calendarEl, {
 
     // 予定がない部分をクリック
     selectable: true,  // trueにしないと選択できない
-    select: function (start, end, allDay) {
+    select: function (start) {
+        start=start.startStr;
         createModal(start);
     },
     // 予定がある部分をクリック
@@ -54,6 +55,8 @@ const cost = document.getElementById("cost");
 const traffic = document.getElementById("traffic");
 const other = document.getElementById("other");
 const total = document.getElementById("total")
+const memo = document.getElementById("body")
+const start = document.getElementById("start")
 
 
 
@@ -71,7 +74,7 @@ const formId = modalForm.querySelector('input[name="id"]');
 // const formStartTime = modalForm.querySelector('input[name="start_time"]');
 // const formEndDate = modalForm.querySelector('input[name="end_date"]');
 // const formEndTime = modalForm.querySelector('input[name="end_time"]');
-const formTitle = modalForm.querySelector('input[name="title"]');
+// const formTitle = modalForm.querySelector('input[name="title"]');
 const formBody = modalForm.querySelector('textarea[name="body"]');
 
 function toggleModal() {
@@ -107,18 +110,27 @@ function updateForm() {
 }
 
 // 登録時のモーダル設定
-function createModal(start) {
+function createModal(e_start) {
     console.log("createModal");
+    // console.log(e_start);
 
     // フォームの初期化
     modalForm.reset();
 
     // フォームの初期値を設定
+        start.value = e_start;
+        meal.value = "";
+        item.value = "";
+        cost.value = "";
+        traffic.value = "";
+        other.value = "";
+        total.value = "";
+
     // formStartDate.value = start.startStr;
     // formStartTime.value = "09:00:00";
     // formEndDate.value = start.startStr;
     // formEndTime.value = "10:00:00";
-    formTitle.value = "";
+    // formTitle.value = "";
     formBody.value = "";
 
     // ボタンの表示/非表示
@@ -135,17 +147,21 @@ function createModal(start) {
 // 編集時のモーダル処理
 function editModal(event) {
     console.log("editModal");
+    console.log(event);
 
     // // フォームの初期化
     modalForm.reset();
 
+    
+
     formId.value = event.id;
+    meal.value = event.meal;
     // formAllDay.checked = event.allDay;
     // formStartDate.value = calendar.formatDate(event.start, 'YYYY-MM-DD');
     // formStartTime.value = event.allDay ? "" : calendar.formatDate(event.start, 'HH:mm:ss');
     // formEndDate.value = event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'YYYY-MM-DD');
     // formEndTime.value = event.allDay ? "" : event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'HH:mm:ss');
-    formTitle.value = event.title;
+    // formTitle.value = event.title;
     formBody.value = event.extendedProps.body;
 
     // ボタンの表示/非表示
@@ -158,9 +174,25 @@ function editModal(event) {
     toggleModal();
 }
 
+// フォームの合計を出す関数
+modal.addEventListener('change', function() {
+    console.log('change!!');
+    const items = [meal.value, item.value, cost.value, traffic.value, other.value]
+
+    let sum = 0
+    for (let i = 0; i < items.length; i++) {
+        sum += Number(items[i])
+    }
+    console.log(sum)
+
+    total.value = sum;
+});
+
 // 登録ボタンの処理
 addButton.addEventListener('click', function () {
     console.log('addButton');
+    // ここで合計の変数を定義
+    // const total = 計算処理
     // const isAllDay = formAllDay.checked;
     // 今回のデータに合わせる
     const data = {
@@ -170,11 +202,15 @@ addButton.addEventListener('click', function () {
         traffic: traffic.value,
         other: other.value,
         total: total.value,//こんな風に合わせる
-        body: formBody.value,
+        // total: 合計の変数,//こんな風に合わせる
+
+        memo: memo.value,
+        // body: formBody.value,
         // start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
         // end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
         type: 'add', // 必要
         // meal: meal.value
+        start: start.value
     };
     axios.post('/calendar/action', data)
         .then((response) => {
@@ -188,11 +224,12 @@ updateButton.addEventListener('click', function () {
     const isAllDay = formAllDay.checked;
     const data = {
         id: formId.value,
-        title: formTitle.value,
+        // title: formTitle.value,
         body: formBody.value,
         // start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
         // end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
         type: 'update'
+        
     };
     axios.post('/calendar/action', data)
         .then((response) => {

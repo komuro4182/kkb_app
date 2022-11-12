@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use Dflydev\DotAccessData\Data;
 
 class FullCalendarController extends Controller
 {
@@ -11,15 +12,16 @@ class FullCalendarController extends Controller
     {
         $data = Event::where('user_id', $request->user()->id)
             ->whereDate('start', '>=', $request->start)
-            ->whereDate('end',   '<=', $request->end)
-            ->get(['id', 'title', 'body', 'start', 'end']);
-
+            ->whereDate('start', '<=', $request->end)
+            // ->get(['id', 'title', 'body', 'start', 'end']);
+            ->get(['id', 'start', 'total']);
         return response()->json($data);
     }
 
     public function action(Request $request)
     {
         if ($request->type == 'add') {
+            logger($request);
             $event = new Event($request->all());
             $event->user_id = $request->user()->id;
             $event->save();
@@ -40,6 +42,7 @@ class FullCalendarController extends Controller
             $event->delete();
 
             return response()->json($event);
+            
         }
     }
 }
