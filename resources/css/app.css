@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* input内テキスト右寄せ */
+.money {
+  text-align: right;
+  /* width: 100px; */
+}
+
+/* お金マークを左寄せ */
+.money::placeholder {
+  text-align: right;
+}

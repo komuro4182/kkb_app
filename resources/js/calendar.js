@@ -47,6 +47,17 @@ const calendar = new Calendar(calendarEl, {
 
 calendar.render();
 
+// 他の要素も以下のように取得
+const meal = document.getElementById("meal");
+const item = document.getElementById("item");
+const cost = document.getElementById("cost");
+const traffic = document.getElementById("traffic");
+const other = document.getElementById("other");
+const total = document.getElementById("total")
+
+
+
+
 const modal = document.getElementById("modal-id");
 const modalBg = document.getElementById("modal-id-bg");
 const addButton = document.getElementById('add-button');
@@ -55,11 +66,11 @@ const closeModalButton = document.getElementById('cancel-button');
 const deleteButton = document.getElementById('delete-button');
 const modalForm = document.getElementById('modal-form');
 const formId = modalForm.querySelector('input[name="id"]');
-const formAllDay = modalForm.querySelector('input[name="all_day"]');
-const formStartDate = modalForm.querySelector('input[name="start_date"]');
-const formStartTime = modalForm.querySelector('input[name="start_time"]');
-const formEndDate = modalForm.querySelector('input[name="end_date"]');
-const formEndTime = modalForm.querySelector('input[name="end_time"]');
+// const formAllDay = modalForm.querySelector('input[name="all_day"]');
+// const formStartDate = modalForm.querySelector('input[name="start_date"]');
+// const formStartTime = modalForm.querySelector('input[name="start_time"]');
+// const formEndDate = modalForm.querySelector('input[name="end_date"]');
+// const formEndTime = modalForm.querySelector('input[name="end_time"]');
 const formTitle = modalForm.querySelector('input[name="title"]');
 const formBody = modalForm.querySelector('textarea[name="body"]');
 
@@ -77,18 +88,18 @@ modalForm.addEventListener('change', updateForm);
 // フォームの表示更新
 function updateForm() {
     // 終日のチェックでフォーム切り替え
-    const isAllDay = formAllDay.checked;
-    if (isAllDay) {
-        formStartTime.classList.add('hidden');
-        formStartTime.required = false;
-        formEndTime.classList.add('hidden');
-        formEndTime.required = false;
-    } else {
-        formStartTime.classList.remove('hidden');
-        formStartTime.required = true;
-        formEndTime.classList.remove('hidden');
-        formEndTime.required = true;
-    }
+    // const isAllDay = formAllDay.checked;
+    // if (isAllDay) {
+        // formStartTime.classList.add('hidden');
+        // formStartTime.required = false;
+        // formEndTime.classList.add('hidden');
+        // formEndTime.required = false;
+    // } else {
+        // formStartTime.classList.remove('hidden');
+        // formStartTime.required = true;
+        // formEndTime.classList.remove('hidden');
+        // formEndTime.required = true;
+    
     // 入力チェックでボタンの有効/無効
     const isRequired = modalForm.checkValidity();
     addButton.disabled = isRequired ? false : true;
@@ -103,10 +114,10 @@ function createModal(start) {
     modalForm.reset();
 
     // フォームの初期値を設定
-    formStartDate.value = start.startStr;
-    formStartTime.value = "09:00:00";
-    formEndDate.value = start.startStr;
-    formEndTime.value = "10:00:00";
+    // formStartDate.value = start.startStr;
+    // formStartTime.value = "09:00:00";
+    // formEndDate.value = start.startStr;
+    // formEndTime.value = "10:00:00";
     formTitle.value = "";
     formBody.value = "";
 
@@ -129,11 +140,11 @@ function editModal(event) {
     modalForm.reset();
 
     formId.value = event.id;
-    formAllDay.checked = event.allDay;
-    formStartDate.value = calendar.formatDate(event.start, 'YYYY-MM-DD');
-    formStartTime.value = event.allDay ? "" : calendar.formatDate(event.start, 'HH:mm:ss');
-    formEndDate.value = event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'YYYY-MM-DD');
-    formEndTime.value = event.allDay ? "" : event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'HH:mm:ss');
+    // formAllDay.checked = event.allDay;
+    // formStartDate.value = calendar.formatDate(event.start, 'YYYY-MM-DD');
+    // formStartTime.value = event.allDay ? "" : calendar.formatDate(event.start, 'HH:mm:ss');
+    // formEndDate.value = event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'YYYY-MM-DD');
+    // formEndTime.value = event.allDay ? "" : event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'HH:mm:ss');
     formTitle.value = event.title;
     formBody.value = event.extendedProps.body;
 
@@ -150,13 +161,20 @@ function editModal(event) {
 // 登録ボタンの処理
 addButton.addEventListener('click', function () {
     console.log('addButton');
-    const isAllDay = formAllDay.checked;
+    // const isAllDay = formAllDay.checked;
+    // 今回のデータに合わせる
     const data = {
-        title: formTitle.value,
+        meal: meal.value, 
+        item: item.value,
+        cost: cost.value,
+        traffic: traffic.value,
+        other: other.value,
+        total: total.value,//こんな風に合わせる
         body: formBody.value,
-        start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
-        end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
-        type: 'add'
+        // start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
+        // end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
+        type: 'add', // 必要
+        // meal: meal.value
     };
     axios.post('/calendar/action', data)
         .then((response) => {
@@ -172,8 +190,8 @@ updateButton.addEventListener('click', function () {
         id: formId.value,
         title: formTitle.value,
         body: formBody.value,
-        start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
-        end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
+        // start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
+        // end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
         type: 'update'
     };
     axios.post('/calendar/action', data)

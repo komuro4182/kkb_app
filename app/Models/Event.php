@@ -12,10 +12,11 @@ class Event extends Model
 
     protected $fillable = [
         'user_id',
-        'title',
-        'body',
-        'start',
-        'end',
+        'meal',
+        'item',
+        'cost',
+        'other',
+        'memo'
     ];
 
     /**

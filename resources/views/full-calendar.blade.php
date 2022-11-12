@@ -11,15 +11,15 @@
                     class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                     <!--body-->
                     <form action="" method="POST" id="modal-form" class="relative p-6 flex-auto">
-                        {{-- <input type="hidden" name="id" id="id">
-                        <div class="my-4 text-slate-500 text-lg leading-relaxed">
+                        <input type="hidden" name="id" id="id">
+                        {{-- <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label for="all_day">{{ __('AllDay') }}</label>
                             <input type="checkbox" name="all_day" id="all_day">
-                        </div>
-                        <div class="my-4 text-slate-500 text-lg leading-relaxed">
+                        </div> --}}
+                        {{-- <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="start">
                                 {{ __('Event Start') }}
-                            </label> --}}
+                            </label>
                             <input type="date" name="start_date" id="start_date" required
                                 class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <input type="time" name="start_time" id="start_date"
@@ -33,21 +33,54 @@
                                 class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                             <input type="time" name="end_time" id="end_date"
                                 class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                        </div>
+                        </div> --}}
                         <div class="my-4 text-slate-500 text-lg leading-relaxed">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
-                                {{ __('カテゴリー') }}
+                                {{ __('Event Name') }}
                             </label>
-                            <input type="radio" name="title" id="title" required placeholder="イベント名"
+                            <input type="text" name="title" id="title" required placeholder="支払い方法→ここいらないかも"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                            <input type="radio" name="title" id="title" required placeholder="イベント名"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        
+                        </div>
+                        <div class="my-4 text-slate-500 text-lg leading-relaxed">
+                            
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                {{ __('食費') }}
+                            </label>
+                            <input type="text" name="meal" class="money" id="meal" required placeholder="円" 
+                                class="shadow appearance-none border rounded w-half w py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                {{ __('日用品') }}
+                            </label>
+                            <input type="text" name="item" class="money" id="item" required placeholder="円"
+                                class="shadow appearance-none border rounded w-half w py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                {{ __('固定費') }}
+                            </label>
+                            <input type="text" name="cost" class="money" id="cost" required placeholder="円"
+                                class="shadow appearance-none border rounded w-half w py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                {{ __('交通費') }}
+                            </label>
+                            <input type="text" name="traffic" class="money" id="traffic" required placeholder="円"
+                                class="shadow appearance-none border rounded w-half w py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                {{ __('その他') }}
+                            </label>
+                            <input type="text" name="other"class="money" id="other" required placeholder="円"
+                                class="shadow appearance-none border rounded w-half w py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+                                {{ __('合計') }}
+                            </label>
+                            <input type="text" name="total"class="money" id="total" required placeholder="円"
+                                class="shadow appearance-none border rounded w-half w py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            </label>
                         </div>
                         <div class="my-4 text-slate-500 text-lg leading-relaxed mb-2">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                                {{ __('Description') }}
+                                {{ __('memo') }}
                             </label>
-                            <textarea name="body" id="body" placeholder="Description" required
+                            <textarea name="body" id="body" placeholder="memo" required
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline h-32"></textarea>
                         </div>
                     </form>
@@ -59,7 +92,7 @@
                         </button>
                         <button type="button" id="update-button"
                             class="hidden bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            {{ __('更新') }}
+                            {{ __('Update') }}
                         </button>
                         <button type="button" id="cancel-button"
                             class="text-center text-gray-500 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
@@ -77,4 +110,5 @@
     </section>
     <!-- モーダルエリアここまで -->
     <script src="{{ mix('js/calendar.js') }}"></script>
+    
 </x-app-layout>

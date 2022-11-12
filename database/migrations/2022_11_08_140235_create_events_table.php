@@ -19,16 +19,13 @@ class CreateEventsTable extends Migration
                 ->constrained()  // テーブル名が異なる場合は引数にしてい
                 ->cascadeOnDelete()   // 紐付け先が削除された場合の動作
                 ->cascadeOnUpdate();  // 紐付け先が更新された場合の動作
-            // 上記以外の方法
-            // $table->foreign('user_id')
-            //     ->references('id')
-            //     ->on('users')
-            //     ->onDelete('cascade')
-            //     ->onUpdate('cascade');
-            $table->string('title');
-            $table->text('body');
-            $table->string('start');
-            $table->string('end');
+            $table->integer('meal');
+            $table->integer('item');
+            $table->integer('cost');
+            $table->integer('traffic');
+            $table->integer('other');
+            $table->integer('total');
+            $table->text('memo');
             $table->timestamps();
         });
     }
