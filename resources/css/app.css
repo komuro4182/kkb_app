@@ -12,3 +12,13 @@
 .money::placeholder {
   text-align: right;
 }
+
+.fc-event-title-container {
+    text-align: end;
+    background-color: aqua;
+    color: black;
+}
+.fc-event-title-container::after {
+    content: "円";
+    padding: 1px;
+}

@@ -37622,7 +37622,8 @@ var calendar = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__.Calendar(cale
   // 予定がない部分をクリック
   selectable: true,
   // trueにしないと選択できない
-  select: function select(start, end, allDay) {
+  select: function select(start) {
+    start = start.startStr;
     createModal(start);
   },
   // 予定がある部分をクリック
@@ -37649,7 +37650,8 @@ var cost = document.getElementById("cost");
 var traffic = document.getElementById("traffic");
 var other = document.getElementById("other");
 var total = document.getElementById("total");
-var memo = document.getElementById("body");
+var memo = document.getElementById("memo");
+var start = document.getElementById("start");
 var modal = document.getElementById("modal-id");
 var modalBg = document.getElementById("modal-id-bg");
 var addButton = document.getElementById('add-button');
@@ -37698,14 +37700,15 @@ function updateForm() {
 }
 
 // 登録時のモーダル設定
-function createModal(start) {
+function createModal(e_start) {
   console.log("createModal");
+  // console.log(e_start);
 
   // フォームの初期化
   modalForm.reset();
 
   // フォームの初期値を設定
-
+  start.value = e_start;
   meal.value = "";
   item.value = "";
   cost.value = "";
@@ -37718,7 +37721,7 @@ function createModal(start) {
   // formEndDate.value = start.startStr;
   // formEndTime.value = "10:00:00";
   // formTitle.value = "";
-  formBody.value = "";
+  // formBody.value = "";         自分で消してみた
 
   // ボタンの表示/非表示
   updateButton.classList.add('hidden');
@@ -37734,17 +37737,26 @@ function createModal(start) {
 // 編集時のモーダル処理
 function editModal(event) {
   console.log("editModal");
+  console.log(event);
 
   // // フォームの初期化
   modalForm.reset();
+  start.value = event.startStr;
   formId.value = event.id;
+  meal.value = event.extendedProps.meal;
+  item.value = event.extendedProps.item;
+  cost.value = event.extendedProps.cost;
+  traffic.value = event.extendedProps.traffic;
+  other.value = event.extendedProps.other;
+  total.value = event.extendedProps.total;
+  memo.value = event.extendedProps.memo;
   // formAllDay.checked = event.allDay;
   // formStartDate.value = calendar.formatDate(event.start, 'YYYY-MM-DD');
   // formStartTime.value = event.allDay ? "" : calendar.formatDate(event.start, 'HH:mm:ss');
   // formEndDate.value = event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'YYYY-MM-DD');
   // formEndTime.value = event.allDay ? "" : event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'HH:mm:ss');
   // formTitle.value = event.title;
-  formBody.value = event.extendedProps.body;
+  // formBody.value = event.extendedProps.body;
 
   // ボタンの表示/非表示
   updateButton.classList.remove('hidden');
@@ -37789,10 +37801,11 @@ addButton.addEventListener('click', function () {
     // body: formBody.value,
     // start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
     // end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
-    type: 'add' // 必要
+    type: 'add',
+    // 必要
     // meal: meal.value
+    start: start.value
   };
-
   axios.post('/calendar/action', data).then(function (response) {
     calendar.addEvent(response.data);
     toggleModal();
@@ -37801,21 +37814,30 @@ addButton.addEventListener('click', function () {
 
 // 更新ボタンの処理
 updateButton.addEventListener('click', function () {
-  var isAllDay = formAllDay.checked;
+  // const isAllDay = formAllDay.checked;
   var data = {
+    meal: meal.value,
+    item: item.value,
+    cost: cost.value,
+    traffic: traffic.value,
+    other: other.value,
+    total: total.value,
+    memo: memo.value,
     id: formId.value,
     // title: formTitle.value,
-    body: formBody.value,
+    // body: formBody.value,
     // start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
     // end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
-    type: 'update'
+    type: 'update',
+    start: start.value
   };
   axios.post('/calendar/action', data).then(function (response) {
     var event = calendar.getEventById(formId.value);
-
+    console.log('updateButton');
     //予定を削除して追加(更新)
+    console.log(data);
     event.remove();
-    calendar.addEvent(data);
+    calendar.addEvent(response.data);
     toggleModal();
   });
 });

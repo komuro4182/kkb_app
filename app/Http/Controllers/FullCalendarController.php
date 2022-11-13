@@ -14,7 +14,7 @@ class FullCalendarController extends Controller
             ->whereDate('start', '>=', $request->start)
             ->whereDate('start', '<=', $request->end)
             // ->get(['id', 'title', 'body', 'start', 'end']);
-            ->get(['id', 'start', 'total']);
+            ->get(['id', 'user_id', 'start', 'meal', 'item', 'cost', 'traffic', 'other', 'total', 'memo']);
         return response()->json($data);
     }
 
@@ -31,6 +31,7 @@ class FullCalendarController extends Controller
 
         if ($request->type == 'update') {
             $event = Event::find($request->id);
+            logger($request);
             $event->fill($request->all());
             $event->save();
 
@@ -42,7 +43,6 @@ class FullCalendarController extends Controller
             $event->delete();
 
             return response()->json($event);
-            
         }
     }
 }

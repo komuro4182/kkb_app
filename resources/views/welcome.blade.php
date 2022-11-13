@@ -418,13 +418,12 @@
                         }">
                     </div>
                     <div class="w-4/5 z-10">
-                        <h2 class="text-5xl xl:text-8xl italic mb-6 text-orange-500 font-bold leading-tight mb-6">Money
-                            Defence</h2>
-                        <div class="text-5xl sm:text-6xl xl:text-8xl text-orange-500 font-bold leading-tight mb-6">
-                            これが続かなければ<br>人間じゃない
+                        <h2 class="text-3xl xl:text-8xl text-orange-500 font-bold leading-tight mb-6">お金を守れ!!!</h2>
+                        <div class="text-5xl sm:text-6xl xl:text-8xl italic mb-6 text-orange-500 font-bold leading-tight mb-6">
+                            Money defence
                         </div>
                         <div class="text-3xl xl:text-5xl italic mb-6 text-orange-500">
-                            支出だけを記録し､お金の使い方を確認する家計簿アプリです</div>
+                            支出だけを記録し､<br>お金の使い方を確認する家計簿アプリです</div>
                     </div>
                     <div
                         class="md:flex md:items-center md:justify-center w-full sm:w-auto md:h-full md:w-2/5 p-8 md:p-10 lg:p-14 sm:rounded-lg md:rounded-none relative z-11">

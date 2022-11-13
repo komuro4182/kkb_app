@@ -19,7 +19,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/', [EventController::class, 'index'])
+Route::get('/calendar', [EventController::class, 'full-calendar'])
     ->name('root')
     ->middleware('auth');
 

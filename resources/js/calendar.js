@@ -55,7 +55,7 @@ const cost = document.getElementById("cost");
 const traffic = document.getElementById("traffic");
 const other = document.getElementById("other");
 const total = document.getElementById("total")
-const memo = document.getElementById("body")
+const memo = document.getElementById("memo")
 const start = document.getElementById("start")
 
 
@@ -131,7 +131,7 @@ function createModal(e_start) {
     // formEndDate.value = start.startStr;
     // formEndTime.value = "10:00:00";
     // formTitle.value = "";
-    formBody.value = "";
+    // formBody.value = "";         自分で消してみた
 
     // ボタンの表示/非表示
     updateButton.classList.add('hidden');
@@ -153,16 +153,23 @@ function editModal(event) {
     modalForm.reset();
 
     
+    start.value = event.startStr;
 
     formId.value = event.id;
-    meal.value = event.meal;
+    meal.value = event.extendedProps.meal;
+    item.value = event.extendedProps.item;
+    cost.value = event.extendedProps.cost;
+    traffic.value = event.extendedProps.traffic;
+    other.value = event.extendedProps.other;
+    total.value = event.extendedProps.total;
+    memo.value = event.extendedProps.memo;
     // formAllDay.checked = event.allDay;
     // formStartDate.value = calendar.formatDate(event.start, 'YYYY-MM-DD');
     // formStartTime.value = event.allDay ? "" : calendar.formatDate(event.start, 'HH:mm:ss');
     // formEndDate.value = event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'YYYY-MM-DD');
     // formEndTime.value = event.allDay ? "" : event.hasEnd ? calendar.formatDate(event.end, 'YYYY-MM-DD') : calendar.formatDate(event.start, 'HH:mm:ss');
     // formTitle.value = event.title;
-    formBody.value = event.extendedProps.body;
+    // formBody.value = event.extendedProps.body;
 
     // ボタンの表示/非表示
     updateButton.classList.remove('hidden');
@@ -221,23 +228,36 @@ addButton.addEventListener('click', function () {
 
 // 更新ボタンの処理
 updateButton.addEventListener('click', function () {
-    const isAllDay = formAllDay.checked;
+
+    // const isAllDay = formAllDay.checked;
     const data = {
+        meal: meal.value, 
+        item: item.value,
+        cost: cost.value,
+        traffic: traffic.value,
+        other: other.value,
+        total: total.value,
+        memo: memo.value,
         id: formId.value,
         // title: formTitle.value,
-        body: formBody.value,
+        // body: formBody.value,
         // start: isAllDay ? formStartDate.value : formStartDate.value + ' ' + formStartTime.value,
         // end: isAllDay ? formEndDate.value : formEndDate.value + ' ' + formEndTime.value,
-        type: 'update'
+        type: 'update',
         
+        start: start.value,
     };
     axios.post('/calendar/action', data)
         .then((response) => {
             const event = calendar.getEventById(formId.value);
+
+
             
+            console.log('updateButton');
             //予定を削除して追加(更新)
+            console.log(data);
             event.remove();
-            calendar.addEvent(data);
+            calendar.addEvent(response.data);
 
             toggleModal();
         });

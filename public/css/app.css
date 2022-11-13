@@ -2083,6 +2083,16 @@ select {
 .money::placeholder {
   text-align: right;
 }
+
+.fc-event-title-container {
+    text-align: end;
+    background-color: aqua;
+    color: black;
+}
+.fc-event-title-container::after {
+    content: "円";
+    padding: 1px;
+}
 .hover\:border-gray-300:hover {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
