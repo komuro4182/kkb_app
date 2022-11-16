@@ -1,0 +1,26 @@
+@host = localhost
+
+### index
+GET /api/calendar HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+
+### ind
+GET /api/calendar/action HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "type": "update",
+  "meal": "1",
+  "item": "1",
+  "cost": "1",
+  "traffic": "1",
+  "other": "1",
+  "total": "5",
+  "memo": "1",
+  "type": "add",
+  "start": "2022-11-02",
+}
+

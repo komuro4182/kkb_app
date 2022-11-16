@@ -48,9 +48,9 @@
 
                         <x-slot name="content">
                             <!-- Account Management -->
-                            <x-jet-dropdown-link href="{{ route('events.create') }}">
+                            {{-- <x-jet-dropdown-link href="{{ route('events.create') }}">
                                 {{ __('Create') }}
-                            </x-jet-dropdown-link>
+                            </x-jet-dropdown-link> --}}
 
                             <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Profile') }}

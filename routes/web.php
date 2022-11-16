@@ -19,9 +19,13 @@ Route::get('/welcome', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/calendar', [EventController::class, 'full-calendar'])
-    ->name('root')
-    ->middleware('auth');
+// Route::get('/', [FullCalendarController::class, 'index'])
+//     ->name('root')
+//     ->middleware('auth');
+
+Route::get('/', function () {
+    return view('full-calendar');
+})->name('calendar')->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',
@@ -33,12 +37,12 @@ Route::middleware([
     })->name('dashboard');
 
     // CRUD用
-    Route::resource('events', EventController::class);
+    // Route::resource('events', EventController::class);
 
+});
     // カレンダー用
     Route::get('calendar', function () {
         return view('full-calendar');
     })->name('calendar');
     Route::get('calendar/action', [FullCalendarController::class, 'index']);
     Route::post('calendar/action', [FullCalendarController::class, 'action']);
-});

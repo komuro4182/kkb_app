@@ -20,6 +20,7 @@ class FullCalendarController extends Controller
 
     public function action(Request $request)
     {
+        logger($request);
         if ($request->type == 'add') {
             logger($request);
             $event = new Event($request->all());
