@@ -23,17 +23,19 @@ class FullCalendarController extends Controller
 
    public function action(Request $request)
     {
-    return response()->json($request);
-        // if ($request->type == 'add') {
-        //     logger($request);
-        //     $event = new Event($request->all());
-        //     // $event = Event::find(1);
-        //     //  return response()->json($event);
-        //     $event->user_id = $request->user()->id;
-        //     $event->save();
+    // return $request;
+    // return response()->json($request);
+        if ($request->type == 'add') {
+            logger($request);
+            $event = new Event($request->all());
+            // $event = Event::find(1);
+            //  return response()->json($event);
+            // $event->user_id = $request->user()->id;
+            $event->user_id = 1;
+            $event->save();
 
-        //     return response()->json($event);
-        // }
+            return response()->json($event);
+        }
 
         // if ($request->type == 'update') {
         //     $event = Event::find($request->id);

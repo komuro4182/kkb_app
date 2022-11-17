@@ -5,14 +5,20 @@ GET /api/calendar HTTP/1.1
 Host: {{ host }}
 Accept: application/json
 
-### ind
+### index
 GET /api/calendar/action HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+
+### action add
+POST /api/calendar/action HTTP/1.1
 Host: {{ host }}
 Accept: application/json
 Content-Type: application/json
 
 {
-  "type": "update",
+  "type": "add",
+  "user_id": "",
   "meal": "1",
   "item": "1",
   "cost": "1",
@@ -20,7 +26,45 @@ Content-Type: application/json
   "other": "1",
   "total": "5",
   "memo": "1",
-  "type": "add",
-  "start": "2022-11-02",
+  "start": "2022-11-02"
+}
+
+### action uodate
+POST /api/calendar/action HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "type": "update",
+  "id": "",
+  "meal": "1",
+  "item": "1",
+  "cost": "1",
+  "traffic": "1",
+  "other": "1",
+  "total": "5",
+  "memo": "1",
+  "start": "2022-11-02"
+}
+
+### action delete
+POST /api/calendar/action HTTP/1.1
+Host: {{ host }}
+Accept: application/json
+Content-Type: application/json
+
+{
+  "type": "delete",
+  "id": "",
+  "user_id": "",
+  "meal": "1",
+  "item": "1",
+  "cost": "1",
+  "traffic": "1",
+  "other": "1",
+  "total": "5",
+  "memo": "1",
+  "start": "2022-11-02"
 }
 
