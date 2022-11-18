@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class FullCalendarController extends Controller
 {
+
+    public function __construct()
+    {
+        return $this->authorizeResource(Post::class, 'calendar');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,7 @@ class FullCalendarController extends Controller
         $data = Event::where('user_id', 1)
             // ->get(['id', 'title', 'body', 'start', 'end']);
             ->get(['id', 'user_id', 'start', 'meal', 'item', 'cost', 'traffic', 'other', 'total', 'memo']);
-        return response()->json($data);
+        return response()->json(["data" => $data]);
     }
 
    public function action(Request $request)
