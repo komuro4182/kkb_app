@@ -11,7 +11,7 @@ class FullCalendarController extends Controller
 
     public function __construct()
     {
-        return $this->authorizeResource(Event::class, 'event');
+        // return $this->authorizeResource(Event::class, 'event');
     }
     /**
      * Display a listing of the resource.
