@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* input内テキスト右寄せ */
+.money {
+  text-align: right;
+  /* width: 100px; */
+}
+
+/* お金マークを左寄せ */
+.money::placeholder {
+  text-align: right;
+}
+
+.fc-event-title-container {
+    text-align: end;
+    background-color: aqua;
+    color: black;
+}
+.fc-event-title-container::after {
+    content: "円";
+    padding: 1px;
+}
