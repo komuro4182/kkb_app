@@ -66,7 +66,7 @@
 
         .bg-gray-100 {
             --bg-opacity: 1;
-            background-color: #f7fafc;
+            background-color: #e7951a;
             background-color: rgba(247, 250, 252, var(--bg-opacity))
         }
 

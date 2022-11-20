@@ -18,9 +18,9 @@ class FullCalendarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Event::where('user_id', 1)
+        $data = Event::where('user_id', $request->user()->id)
             // ->get(['id', 'title', 'body', 'start', 'end']);
             ->get(['id', 'user_id', 'start', 'meal', 'item', 'cost', 'traffic', 'other', 'total', 'memo']);
         return response()->json(["data" => $data]);
